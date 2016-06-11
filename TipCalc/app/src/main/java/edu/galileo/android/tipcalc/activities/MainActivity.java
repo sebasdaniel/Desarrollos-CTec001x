@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.Date;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -22,21 +24,24 @@ import edu.galileo.android.tipcalc.R;
 import edu.galileo.android.tipcalc.TipCalcApp;
 import edu.galileo.android.tipcalc.fragments.TipHistoryListFragment;
 import edu.galileo.android.tipcalc.fragments.TipHistoryListFragmentListener;
+import edu.galileo.android.tipcalc.models.TipRecord;
 
 public class MainActivity extends AppCompatActivity {
 
     @Bind(R.id.inputBill)
     EditText inputBill;
-    @Bind(R.id.btnSubmit)
-    Button btnSubmit;
+    // Buttons are commented because we are using only their clicks events,
+    // which with Butterknife is not needed then to declare the buttons
+//    @Bind(R.id.btnSubmit)
+//    Button btnSubmit;
     @Bind(R.id.inputPercentage)
     EditText inputPercentage;
-    @Bind(R.id.btnIncrease)
-    Button btnIncrease;
-    @Bind(R.id.btnDecrease)
-    Button btnDecrease;
-    @Bind(R.id.btnClear)
-    Button btnClear;
+//    @Bind(R.id.btnIncrease)
+//    Button btnIncrease;
+//    @Bind(R.id.btnDecrease)
+//    Button btnDecrease;
+//    @Bind(R.id.btnClear)
+//    Button btnClear;
     @Bind(R.id.txtTip)
     TextView txtTip;
 
@@ -74,18 +79,25 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.btnSubmit)
     public void handleClickSubmit() {
-        //Log.e("MainActivity", "Click en submit");
+
         hideKeyboard();
         String strInputTotal = inputBill.getText().toString().trim();
 
         if (!strInputTotal.isEmpty()) {
+
             double total = Double.parseDouble(strInputTotal);
             int tipPercentage = getTipPercentage();
             float tip = (float) (total * (tipPercentage/100f));
 
-            String strTip = String.format(getString(R.string.global_message_tip), tip);
+            TipRecord record = new TipRecord();
 
-            fragmentListener.action(strTip);
+            record.setBill(total);
+            record.setTipPercentage(tipPercentage);
+            record.setTimestamp(new Date());
+
+            String strTip = String.format(getString(R.string.global_message_tip), record.getTip());
+
+            fragmentListener.addToList(record);
 
             txtTip.setVisibility(View.VISIBLE);
             txtTip.setText(strTip);
@@ -113,6 +125,11 @@ public class MainActivity extends AppCompatActivity {
     public void handleClickDecrease() {
         hideKeyboard();
         handleTipChange(-TIP_STEP_CHANGE);
+    }
+
+    @OnClick(R.id.btnClear)
+    public void handleClickClear() {
+        fragmentListener.clearList();
     }
 
     private void handleTipChange(int change) {
