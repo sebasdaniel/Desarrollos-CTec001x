@@ -25,7 +25,7 @@ public class FirebaseHelper {
         private static final FirebaseHelper INSTANCE = new FirebaseHelper();
     }
 
-    public FirebaseHelper getInstance() {
+    public static FirebaseHelper getInstance() {
         return SingletonHolder.INSTANCE;
     }
 
