@@ -9,17 +9,20 @@ import com.firebase.client.ValueEventListener;
 import java.util.HashMap;
 import java.util.Map;
 
+import edu.galileo.android.androidchat.entities.User;
+
 /**
  * Created by m4605 on 14/06/2016.
  */
 public class FirebaseHelper {
 
     private Firebase dataReference;
-    private static final String SEPARATOR = "___";
+    private static final String SEPARATOR = "__";
     private static final String CHATS_PATH = "chats";
     private static final String USERS_PATH = "users";
     private static final String CONTACTS_PATH = "contact";
-    private static final String FIREBASE_URL = "https://android-chat-example.firebaseio.com";
+    //private static final String FIREBASE_URL = "https://android-chat-example.firebaseio.com";
+    private static final String FIREBASE_URL = "https://android-chat-jca.firebaseio.com";
 
     private static class SingletonHolder {
         private static final FirebaseHelper INSTANCE = new FirebaseHelper();
@@ -100,7 +103,7 @@ public class FirebaseHelper {
     }
 
     public void signOff() {
-        notifyContactsOfConnectionChange(false, true);
+        notifyContactsOfConnectionChange(User.OFFLINE, true);
     }
 
     private void notifyContactsOfConnectionChange(final boolean online, final boolean signoff) {
