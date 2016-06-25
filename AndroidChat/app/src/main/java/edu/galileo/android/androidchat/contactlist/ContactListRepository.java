@@ -7,9 +7,11 @@ public interface ContactListRepository {
 
     void signOff();
     String getCurrentUserEmail();
-    void removeContacts();
+    void removeContact(String email);
     void destroyListener();
     void subscribeToContactListEvents();
     void unsubscribeToContactListEvents();
     void checkConnectionStatus(boolean online);
+
+    void changeConnectionStatus(boolean online);
 }
