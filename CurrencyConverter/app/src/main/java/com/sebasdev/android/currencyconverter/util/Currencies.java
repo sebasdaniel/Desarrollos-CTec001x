@@ -1,4 +1,4 @@
-package com.sebasdev.android.currencyconverter;
+package com.sebasdev.android.currencyconverter.util;
 
 /**
  * Created by m4605 on 17/07/16.

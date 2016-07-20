@@ -1,7 +1,6 @@
 package com.sebasdev.android.currencyconverter.data.remote;
 
 import com.google.gson.annotations.SerializedName;
-import com.sebasdev.android.currencyconverter.Currencies;
 
 /**
  * Created by m4605 on 17/07/16.

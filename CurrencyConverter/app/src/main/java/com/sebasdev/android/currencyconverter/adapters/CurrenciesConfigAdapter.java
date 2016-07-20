@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.sebasdev.android.currencyconverter.R;
 import com.sebasdev.android.currencyconverter.data.local.MyCurrency;
+import com.sebasdev.android.currencyconverter.util.Currencies;
 
 import java.util.List;
 
@@ -17,31 +18,31 @@ import butterknife.ButterKnife;
 /**
  * Created by m4605 on 17/07/16.
  */
-public class CurrenciesAdapter extends RecyclerView.Adapter<CurrenciesAdapter.ViewHolder> {
+public class CurrenciesConfigAdapter extends RecyclerView.Adapter<CurrenciesConfigAdapter.ViewHolder> {
 
-    List<MyCurrency> currencies;
+    List<Currencies> currencies;
 
-    public CurrenciesAdapter(List<MyCurrency> currencies) {
+    public CurrenciesConfigAdapter(List<Currencies> currencies) {
         this.currencies = currencies;
     }
 
-    public void setCurrencies(List<MyCurrency> currencies) {
+    public void setCurrencies(List<Currencies> currencies) {
         this.currencies = currencies;
         notifyDataSetChanged();
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_currrency_main, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_currency_config, parent, false);
         ViewHolder vh = new ViewHolder(view);
         return vh;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        MyCurrency currentCurrency = currencies.get(position);
-        holder.txtMainCurrencyName.setText(currentCurrency.getName());
-        holder.txtCurrencyValue.setText(String.valueOf(currentCurrency.getValue()));
+        Currencies currentCurrency = currencies.get(position);
+        holder.txtMainCurrencyName.setText(currentCurrency.name());
+        //holder.txtCurrencyValue.setText(String.valueOf(currentCurrency.getValue()));
     }
 
     @Override
@@ -54,8 +55,8 @@ public class CurrenciesAdapter extends RecyclerView.Adapter<CurrenciesAdapter.Vi
         @BindView(R.id.txtMainCurrencyName)
         TextView txtMainCurrencyName;
 
-        @BindView(R.id.txtCurrencyValue)
-        TextView txtCurrencyValue;
+        @BindView(R.id.imgFav)
+        TextView imgFav;
 
         private View view;
 

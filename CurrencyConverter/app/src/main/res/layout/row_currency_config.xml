@@ -11,7 +11,7 @@
         android:text="Medium Text"
         android:layout_weight="1"
         android:padding="@dimen/activity_horizontal_margin"
-        android:id="@+id/txtMainCurrencyName"
+        android:id="@+id/txtConfigCurrencyName"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"

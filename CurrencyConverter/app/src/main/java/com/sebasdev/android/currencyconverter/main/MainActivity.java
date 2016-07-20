@@ -1,4 +1,4 @@
-package com.sebasdev.android.currencyconverter;
+package com.sebasdev.android.currencyconverter.main;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.sebasdev.android.currencyconverter.R;
 import com.sebasdev.android.currencyconverter.adapters.CurrenciesAdapter;
 import com.sebasdev.android.currencyconverter.data.local.MyCurrency;
 
@@ -35,11 +36,13 @@ public class MainActivity extends AppCompatActivity implements MainViewInterface
     private ProgressDialog progressDialog;
     private List<MyCurrency> currencies;
     private RecyclerView.Adapter adapter;
+    private MainPresenterInterface presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         ButterKnife.bind(this);
         setUp();
 
@@ -49,6 +52,9 @@ public class MainActivity extends AppCompatActivity implements MainViewInterface
                 onBtnConvertClick();
             }
         });
+
+        presenter = new MainPresenter(this);
+        presenter.onCreate();
     }
     
     private void setUp() {
@@ -63,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements MainViewInterface
     }
 
     private void setUpRecyclerView() {
-        //adapter = new CurrenciesAdapter(null); // TODO: 17/07/16 pasar despues los elementos
+        //adapter = new CurrenciesAdapter(null);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
     }
@@ -96,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements MainViewInterface
     }
 
     private void onBtnConvertClick() {
+        // TODO: 20/07/16 se puede usar el llamado a convert del presenter
         double exchange = Double.parseDouble(inputCantidad.getText().toString());
         for (MyCurrency currency : currencies) {
             currency.setValue(currency.getRate()*exchange);

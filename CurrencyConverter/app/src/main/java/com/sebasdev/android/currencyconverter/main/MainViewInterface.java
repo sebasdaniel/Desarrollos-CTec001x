@@ -1,4 +1,4 @@
-package com.sebasdev.android.currencyconverter;
+package com.sebasdev.android.currencyconverter.main;
 
 import com.sebasdev.android.currencyconverter.data.local.MyCurrency;
 
